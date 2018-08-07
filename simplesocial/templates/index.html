@@ -1,0 +1,8 @@
+<!-- home page -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Welcome to Group Social!</h1>
+<h3>The best community for sharing common interests!</h3>
+<h4><a href="{% url 'accounts:login' %}">Login</a> or <a href="{% url 'accounts:signup' %}">Sign-up</a> <em>for free</em> to get started!</h4>
+{% endblock %}

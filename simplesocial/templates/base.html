@@ -1,0 +1,58 @@
+<!-- base template html -->
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Group Social - A social site for groups</title>
+    <!-- Bootstrap3 minified -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Bootstrap3 optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <!-- master.css -->
+    <link rel="stylesheet" href="{% static 'simplesocial/css/master.css'%}">
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse mynav" role='navigation' id='navbar'>
+      <div class="container">
+        <a class="navbar-brand mynav" href="{% url 'home' %}">Group Social</a>
+
+        <!-- push login, logout, signup to right -->
+        <ul class="nav navbar-nav navbar-right">
+          <!-- https://docs.djangoproject.com/en/2.0/ref/request-response/#django.http.HttpRequest.user -->
+          <!-- a request.user attribute is always provided by django on every request which represents the current user. If the current user has not logged in,
+          this attribute will be set to an instance of AnonymousUser, otherwise it will be an instance of User. -->
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'posts:create' %}">Post</a></li>
+          <li><a href="{% url 'groups:all' %}">Groups</a></li>
+          <li><a href="{% url 'groups:create' %}">Create Group</a></li>
+          <!-- call the view named 'logout' from the urls.py of accounts app -->
+          <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+          {% else %}
+          <li><a href="{% url 'groups:all' %}">Groups</a></li>
+          <li><a href="{% url 'accounts:login' %}">Login</a></li>
+          <li><a href="{% url 'accounts:signup' %}">Sign Up</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+
+    <div class="container mycontent">
+      {% block content %}
+      <!-- insert content here -->
+      {% endblock %}
+    </div>
+
+    <canvas id="canvas"></canvas>
+    <span id="note">Click Screen to Play with Fireflies!</span>
+    <span id="footSignature">created by <a href="http://linkedin.com/in/xiangzhensuncareer">Xiangzhen Sun</a></span>
+
+  </body>
+  <script type="text/javascript" src="{% static 'simplesocial/js/master.js'%}">
+  </script>
+</html>

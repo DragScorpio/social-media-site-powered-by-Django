@@ -1,0 +1,37 @@
+{% extends 'groups/group_base.html'%}
+
+{% block pregroup %}
+{# group is passed from the context dictionary (modles.py: lower case of class Group) #}
+<h1>{{group.name}}</h1>
+<h2>Member Count: {{group.members.count}}</h2>
+
+<div class="container">
+  {# check the user who's currently visiting the page in or not in this group: #}
+  {% if user in group.members.all %}
+  {# the following button allows user to leave #}
+  <a href="{% url 'groups:leave' slug=group.slug %}" class="btn btn-large btn-warning">
+    <span class="glyphicon glyphicon-remove-circle">&nbsp;Leave</span>
+  </a>
+  {% else %}
+  {# the following button icon allows user to join a group #}
+  <a href="{% url 'groups:join' slug=group.slug %}" class="btn btn-large btn-primary">
+    <span class="glyphicon glyphicon-ok-circle">&nbsp;Join</span>
+  </a>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block group_content %}
+{# content should takes 2/3 of the page #}
+<div class="col-md-8">
+  {# Post contains ForeignKey to Group; Post has related_name: posts #}
+  {% if group.posts.count == 0 %}
+  <h2>No posts in this group yet!</h2>
+  {% else %}
+    {% for post in group.posts.all %}
+      {# instead of extending a html from base html, we insert/inject a html here: #}
+      {% include "posts/_post.html" %}
+    {% endfor %}
+  {% endif %}
+</div>
+{% endblock %}
