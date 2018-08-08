@@ -7,5 +7,12 @@ from groups import models
 class GroupMemberInline(admin.TabularInline):
     model = models.GroupMember
 
+# customize administration site: add search bar + filter, display fields by listing, and make them listable.
+class GroupAdmin(admin.ModelAdmin):
+    search_fields = ['name',]
+    list_filter = ['name',]
+    list_display = ['name','slug',]
+    # display first before making it editable
+    # list_editable = ['name',]
 
-admin.site.register(models.Group)
+admin.site.register(models.Group,GroupAdmin)

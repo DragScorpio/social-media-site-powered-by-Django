@@ -20,6 +20,9 @@
     <nav class="navbar navbar-inverse mynav" role='navigation' id='navbar'>
       <div class="container">
         <a class="navbar-brand mynav" href="{% url 'home' %}">Group Social</a>
+        <ul class="nav navbar-nav navbar-left">
+          <li><a href="{% url 'admin:index' %}">Admin</a></li>
+        </ul>
 
         <!-- push login, logout, signup to right -->
         <ul class="nav navbar-nav navbar-right">
@@ -49,6 +52,7 @@
     </div>
 
     <canvas id="canvas"></canvas>
+
     <span id="note">Click Screen to Play with Fireflies!</span>
     <span id="footSignature">created by <a href="http://linkedin.com/in/xiangzhensuncareer">Xiangzhen Sun</a></span>
 

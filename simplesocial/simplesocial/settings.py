@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'bootstrap3',
     'accounts',
     'groups',
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'simplesocial.urls'
@@ -134,3 +136,6 @@ STATICFILES_DIRS = [
 # url name comes from simplesocial/urls.py, the same level directory as settings.py
 LOGIN_REDIRECT_URL = 'test' # will deal with this later
 LOGOUT_REDIRECT_URL = 'thanks'
+
+# only run debug_toolbar at local machine's ip:
+INTERNAL_IPS = ['127.0.0.1',]
